@@ -1,6 +1,7 @@
 import URL from "../model/urlmodel.js";
 import { nanoid } from "nanoid";
 
+// this is controller for creating a short url route
 export const createShortUrl = async (req, res) => {
     try {
         const { url } = req.body;
