@@ -15,3 +15,14 @@ When a user successfully creates a short URL using the POST `/shorten` route, th
 - **201 Created**: Indicates that the short URL was successfully created.
 
 ### Example Response
+**orginal url** : {
+  "url": "https://www.abdndnjsffd.com"
+}
+post route result
+{
+    "id": 3,
+    "url": "https://www.abdndnjsffd.com",
+    "shortCode": "k6Wgfv",
+    "createdAt": "2025-03-20T11:38:32.972Z",
+    "updatedAt": "2025-03-20T11:38:32.972Z"
+}

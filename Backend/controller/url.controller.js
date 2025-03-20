@@ -24,6 +24,31 @@ export const createShortUrl = async (req, res) => {
         res.status(201).json(responseData);
     } catch (error) {
         console.error("Error creating a short URL:", error);
-        res.status(500).json({ error: "server error" });
+        res.status(400).json({ error: "Bad Request" });
     }
 };
+
+//  for retrieving original url from shortcode
+export const getOriginalUrl = async (req, res) => {
+    try {
+      const { shortCode } = req.params;
+  
+      // Find the url from db 
+      const foundUrl = await URL.findOne({ shortCode });
+      if (!foundUrl) {
+        return res.status(404).json({ error: "url not found" });
+      }
+  
+      return res.status(200).json({
+        id: foundUrl.id,
+        url: foundUrl.url,
+        shortCode: foundUrl.shortCode,
+        createdAt: foundUrl.createdAt,
+        updatedAt: foundUrl.updatedAt,
+      });
+    } catch (error) {
+      console.error("Error retrieving short URL:", error);
+      return res.status(404).json({ error: "Internal Server Error" });
+    }
+  };
+  
