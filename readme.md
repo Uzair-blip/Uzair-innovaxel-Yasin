@@ -45,3 +45,23 @@ post route result
     "createdAt": "2025-03-20T11:38:32.972Z",
     "updatedAt": "2025-03-20T11:38:32.972Z"
 }
+
+# API Documentation
+
+### Response Status
+ **201 Created**: Indicates that the short URL code original url was updated successfully.
+### Endpoint
+## PUT /shorten/:shortCode
+
+** body **
+{
+  "url": "https://www.example.com/some/updated/url"
+}
+### Example Response
+{
+    "id": "3",
+    "url": "https://www.example.com/some/updated/url",
+    "shortCode": "k6Wgfv",
+    "createdAt": "2025-03-20T11:38:32.972Z",
+    "updatedAt": "2025-03-20T12:14:22.106Z"
+}
