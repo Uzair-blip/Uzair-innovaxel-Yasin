@@ -33,7 +33,12 @@ export const getOriginalUrl = async (req, res) => {
     try {
       const { shortCode } = req.params;
       // Find the url from db 
-      const foundUrl = await URL.findOne({ shortCode });
+      const foundUrl = await URL.findOneAndUpdate(
+        { shortCode },
+        { $inc: { accessCount: 1 } }, // Increment accessCount by 1
+        { new: true } // Return the updated document
+    );
+
       if (!foundUrl) {
         return res.status(404).json({ error: "url not found" });
       }
@@ -78,3 +83,39 @@ export const updateShortUrl = async (req, res) => {
     }
   };
   
+// delete url
+// Delete Short URL by shortCode
+export const deleteShortUrl = async (req, res) => {
+    try {
+      const { shortCode } = req.params;
+      const deletedUrl = await URL.findOneAndDelete({ shortCode });
+      if (!deletedUrl) {
+        return res.status(404).json({ error: "Short URL not found" });
+      }
+      return res.status(204).send(); // 204 No Content
+    } catch (error) {
+      console.error("Error deleting short URL:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
+// Get statistics for a short URL
+export const getUrlStats = async (req, res) => {
+    try {
+        const { shortCode } = req.params;
+        const foundUrl = await URL.findOne({ shortCode });
+        if (!foundUrl) {
+            return res.status(404).json({ error: "URL not found" });
+        }
+        return res.status(200).json({
+            id: foundUrl._id,
+            url: foundUrl.url,
+            shortCode: foundUrl.shortCode,
+            createdAt: foundUrl.createdAt,
+            updatedAt: foundUrl.updatedAt,
+            accessCount: foundUrl.accessCount  
+        });
+    } catch (error) {
+        console.error("Error retrieving URL statistics:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};

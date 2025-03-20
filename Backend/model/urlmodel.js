@@ -16,7 +16,8 @@ const urlSchema = new mongoose.Schema(
       required: true 
     },
     accessCount:{
-        type:Number
+        type:Number,
+        default:0
     }
   },
   { 
