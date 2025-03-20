@@ -32,7 +32,6 @@ export const createShortUrl = async (req, res) => {
 export const getOriginalUrl = async (req, res) => {
     try {
       const { shortCode } = req.params;
-  
       // Find the url from db 
       const foundUrl = await URL.findOne({ shortCode });
       if (!foundUrl) {
@@ -49,6 +48,33 @@ export const getOriginalUrl = async (req, res) => {
     } catch (error) {
       console.error("Error retrieving short URL:", error);
       return res.status(404).json({ error: "Internal Server Error" });
+    }
+  };
+  
+// update short code
+export const updateShortUrl = async (req, res) => {
+    try {
+      const { shortCode } = req.params;
+      const { url } = req.body;  
+      // Find and update the url
+      const updatedUrl = await URL.findOneAndUpdate(
+        { shortCode },
+        { url, updatedAt: new Date() },
+        { new: true } // Return updated document
+      );
+      if (!updatedUrl) {
+        return res.status(404).json({ error: "Short URL not found" });
+      }
+      return res.status(200).json({
+        id: updatedUrl.id,
+        url: updatedUrl.url,
+        shortCode: updatedUrl.shortCode,
+        createdAt: updatedUrl.createdAt,
+        updatedAt: updatedUrl.updatedAt,
+      });
+    } catch (error) {
+      console.error("Error updating short URL:", error);
+      return res.status(400).json({ error: "Internal Server Error" });
     }
   };
   
