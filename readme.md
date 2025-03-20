@@ -14,11 +14,30 @@ When a user successfully creates a short URL using the POST `/shorten` route, th
 
 - **201 Created**: Indicates that the short URL was successfully created.
 
-### Example Response
-**orginal url** : {
+### Example Request
+**original url** : {
   "url": "https://www.abdndnjsffd.com"
 }
 post route result
+{
+    "id": 3,
+    "url": "https://www.abdndnjsffd.com",
+    "shortCode": "k6Wgfv",
+    "createdAt": "2025-03-20T11:38:32.972Z",
+    "updatedAt": "2025-03-20T11:38:32.972Z"
+}
+
+## GET /shorten/:shortCode
+
+### Response Status
+
+- **200 OK**: Indicates that the original URL was successfully retrieved.
+- **404 Not Found**: Indicates that the provided short code does not correspond to any existing URL.
+
+### Example Request
+**shortCode** : `k6Wgfv`
+
+### Example Response
 {
     "id": 3,
     "url": "https://www.abdndnjsffd.com",
