@@ -27,8 +27,37 @@
         toast.error("Error creating short URL!");
       }
     };
-   
     
+    const handleRedirect = async () => {
+      if (!shortCode) {
+        toast.error("Please enter a short code.");
+        return;
+      }
+    
+      try {
+        const response = await axios.get(`${API_BASE_URL}/shorten/${shortCode}`);
+        setOrignalUrl(response.data.url); // ✅ Store original URL instead of redirecting
+        toast.success("Original URL fetched successfully!");
+      } catch (error) {
+        toast.error("Short URL not found!");
+      }
+    };
+    
+    // Function to get URL statistics
+    const handleGetStats = async () => {
+      if (!shortCode) {
+        toast.error("Please enter a short code.");
+        return;
+      }
+
+      try {
+        const response = await axios.get(`${API_BASE_URL}/shorten/${shortCode}/stats`);
+        setStats(response.data);
+      } catch (error) {
+        toast.error("Error fetching statistics!");
+      }
+    };
+
     return (
       <div style={{ padding: "20px", maxWidth: "500px", margin: "auto", textAlign: "center" }}>
         <h2>URL Shortener</h2>
