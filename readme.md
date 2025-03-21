@@ -1,10 +1,10 @@
-# URL Shortener API Documentation
+# URL Shortener API Documentation  
 
 ## Overview
 This document outlines the structure of the API endpoints for the URL Shortener service, including request formats, response structures, and installation instructions.
 
 ---
-
+THE FRONTEND DOCS is in frontend readme
 ## Installation and Setup
 
 ### Backend Installation
@@ -144,7 +144,4 @@ This document outlines the structure of the API endpoints for the URL Shortener 
 2. Start the backend with `npm run dev`.
 3. Use Postman or any API testing tool to interact with the endpoints.
 
----
-
-Let me know if you need any modifications! 🚀
 
