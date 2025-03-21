@@ -18,7 +18,7 @@ This document outlines the structure of the API endpoints for the URL Shortener 
 2. Install dependencies:
    ```sh
    npm i 
-   npm install cors express mongodb mongoose mongoose-sequence nanoid nodemon
+   npm install cors express mongodb mongoose mongoose-sequence nanoid nodemon dotenv
    ```
 
 3. Create a `.env` file in the root directory and add the following environment variables:
