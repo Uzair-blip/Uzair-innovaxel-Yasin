@@ -1,15 +1,26 @@
-import express from "express"
-import connectDB from "./config/db.js"
+import express from "express";
+import connectDB from "./config/db.js";
 import dotenv from "dotenv";
-import urlRoutes from "./routes/url.routes.js"
-const app=express()
-const port =process.env.PORT
-app.use(express.json())
+import cors from "cors";  // Import CORS
+import urlRoutes from "./routes/url.routes.js";
+
 dotenv.config();
-app.use("/", urlRoutes);   // url routes 
-connectDB()
-app.listen(port || 5000, () => {
-    console.log(`Server is running on https://localhost:${port}`);
-  });
-  
-  
+const app = express();
+const port = process.env.PORT || 5000;
+
+// Enable CORS for all origins
+app.use(cors());
+
+// Middleware to parse JSON
+app.use(express.json());
+
+// URL Routes
+app.use("/", urlRoutes);
+
+// Connect to MongoDB
+connectDB();
+
+// Start Server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
