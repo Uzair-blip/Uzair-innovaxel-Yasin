@@ -11,7 +11,7 @@ THE FRONTEND DOCS is in frontend readme
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/Uzair-blip/url-short-assesment.git
+   https://github.com/Uzair-blip/Uzair-innovaxel-Yasin.git 
    cd url-shortener-backend
    ```
 
